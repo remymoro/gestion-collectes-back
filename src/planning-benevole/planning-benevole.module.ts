@@ -4,6 +4,7 @@ import { PlanningBenevoleService } from './planning-benevole.service';
 
 @Module({
   controllers: [PlanningBenevoleController],
-  providers: [PlanningBenevoleService]
+  providers: [PlanningBenevoleService],
+  exports: [PlanningBenevoleService]
 })
 export class PlanningBenevoleModule {}
