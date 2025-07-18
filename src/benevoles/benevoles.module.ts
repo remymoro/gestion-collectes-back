@@ -4,6 +4,7 @@ import { BenevolesService } from './benevoles.service';
 
 @Module({
   controllers: [BenevolesController],
-  providers: [BenevolesService]
+  providers: [BenevolesService],
+  exports: [BenevolesService]
 })
 export class BenevolesModule {}
