@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-restos
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: motdepasse
+      MYSQL_DATABASE: restos_collectes
+      MYSQL_USER: restos_user
+      MYSQL_PASSWORD: restos_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: nest-restos
+    restart: always
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USERNAME: restos_user
+      DB_PASSWORD: restos_pass
+      DB_DATABASE: restos_collectes
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    command: npm
