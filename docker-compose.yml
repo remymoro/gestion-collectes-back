@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mysql:
     image: mysql:8
@@ -15,18 +13,18 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
-  app:
-    build: .
-    container_name: nest-restos
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-restos
     restart: always
     environment:
-      DB_HOST: mysql
-      DB_PORT: 3306
-      DB_USERNAME: restos_user
-      DB_PASSWORD: restos_pass
-      DB_DATABASE: restos_collectes
+      PMA_HOST: mysql
+      PMA_USER: restos_user
+      PMA_PASSWORD: restos_pass
     ports:
-      - "3000:3000"
+      - "8080:80"
     depends_on:
       - mysql
-    command: npm
+
+volumes:
+  mysql_data:
